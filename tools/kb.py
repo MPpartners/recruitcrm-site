@@ -200,7 +200,8 @@ def main(guide_path: str) -> None:
     head = re.sub(r'<meta property="og:title"[^>]*>', '<meta property="og:title" content="База знаний Recruit CRM">', head)
     head = re.sub(r'<meta (name|property)="(og:)?description"[^>]*>', "", head)
     # Only by the direct link: no site navigation in the header.
-    head = re.sub(r'<div class="navlinks">.*?</div>', "", head, flags=re.S)
+    head = re.sub(r'<div class="navlinks"[^>]*>.*?</div>', "", head, flags=re.S)
+    head = re.sub(r'<button class="menu-btn".*?</button>', "", head, flags=re.S)
     head = head.replace('<a class="brand" href="#">', '<a class="brand" href="/">')
     foot = re.sub(r'<div class="footerlinks">.*?</div>', '<div class="footerlinks"><span>© 2026</span></div>', foot, flags=re.S)
     foot = foot.replace('<a class="brand" href="#">', '<a class="brand" href="/">')
