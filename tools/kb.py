@@ -189,6 +189,8 @@ def main(guide_path: str) -> None:
     block = bases_block(m_imp.group(1).strip() + "\n", bases_list, toc)
     body_rest, toc_rest = render("".join(secs.values()))
     body = first + block + body_rest
+    # Internal task numbers of the CRM guide («(T105)») mean nothing to a client.
+    body = re.sub(r"\s*\(T\d{2,4}\)", "", body)
     toc += toc_rest
 
     index = (ROOT / "index.html").read_text(encoding="utf-8")
